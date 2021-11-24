@@ -14,8 +14,7 @@ public class Artiest {
     protected Artiest() {
     }
 
-    public Artiest(long id, String naam) {
-        this.id = id;
+    public Artiest( String naam) {
         this.naam = naam;
     }
 

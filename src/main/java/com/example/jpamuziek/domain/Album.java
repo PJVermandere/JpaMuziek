@@ -19,8 +19,7 @@ public class Album {
     public Album() {
     }
 
-    public Album(long id, Artiest artiest, String naam, int jaar, int score, long barcode) {
-        this.id = id;
+    public Album( Artiest artiest, String naam, int jaar, int score, long barcode) {
         this.artiest = artiest;
         this.naam = naam;
         this.jaar = jaar;
