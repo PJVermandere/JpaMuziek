@@ -2,6 +2,7 @@ package com.example.jpamuziek.domain;
 
 import javax.persistence.*;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity @Table(name = "albums")
 @NamedEntityGraph(name = Album.ALBUM_FINDARTIEST, attributeNodes = @NamedAttributeNode("artiest"))
@@ -11,6 +12,10 @@ public class Album {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "artiestId")
     private Artiest artiest;
+    @ElementCollection
+    @CollectionTable(name = "tracks", joinColumns = @JoinColumn(name = "albumId"))
+    @OrderBy(value = "naam")
+    private Set<Tracks> tracks;
     private String naam;
     private int jaar, score;
     private long barcode;
