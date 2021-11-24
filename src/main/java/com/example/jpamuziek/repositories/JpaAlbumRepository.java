@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.jpamuziek.domain.Album.ALBUM_FINDARTIEST;
 
@@ -21,5 +22,10 @@ public class JpaAlbumRepository implements AlbumRepository {
         return manager.createNamedQuery("Album.findAll")
                 .setHint("javax.persistence.loadgraph", manager.createEntityGraph(ALBUM_FINDARTIEST))
                 .getResultList();
+    }
+
+    @Override
+    public Optional<Album> findById(long id) {
+        return Optional.ofNullable(manager.find(Album.class, id));
     }
 }
