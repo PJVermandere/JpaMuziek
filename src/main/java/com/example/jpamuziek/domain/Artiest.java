@@ -1,13 +1,15 @@
 package com.example.jpamuziek.domain;
 
+import org.springframework.core.annotation.Order;
+
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity @Table(name = "artiesten")
 public class Artiest {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @Id private long id;
     private String naam;
+
 
     protected Artiest() {
     }
