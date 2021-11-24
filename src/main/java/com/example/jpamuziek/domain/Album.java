@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity @Table(name = "albums")
+@NamedEntityGraph(name = Album.ALBUM_FINDARTIEST, attributeNodes = @NamedAttributeNode("artiest"))
 public class Album {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -13,6 +14,7 @@ public class Album {
     private String naam;
     private int jaar, score;
     private long barcode;
+    public static final String ALBUM_FINDARTIEST = "Album.findArtiest";
 
     public Album() {
     }
