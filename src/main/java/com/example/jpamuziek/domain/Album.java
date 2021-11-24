@@ -1,20 +1,22 @@
 package com.example.jpamuziek.domain;
 
 import javax.persistence.*;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity @Table(name = "albums")
 @NamedEntityGraph(name = Album.ALBUM_FINDARTIEST, attributeNodes = @NamedAttributeNode("artiest"))
 public class Album {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
     private long id;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "artiestId")
     private Artiest artiest;
     @ElementCollection
     @CollectionTable(name = "tracks", joinColumns = @JoinColumn(name = "albumId"))
-    @OrderBy(value = "naam")
+    @OrderBy("naam")
     private Set<Tracks> tracks;
     private String naam;
     private int jaar, score;
@@ -30,6 +32,7 @@ public class Album {
         this.jaar = jaar;
         this.score = score;
         this.barcode = barcode;
+        this.tracks = new LinkedHashSet<>();
     }
 
     public long getId() {
@@ -55,6 +58,10 @@ public class Album {
     public long getBarcode() {
         return barcode;
 
+    }
+
+    public Set<Tracks> getTracks() {
+        return Collections.unmodifiableSet(tracks);
     }
 
     @Override
