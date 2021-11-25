@@ -29,7 +29,7 @@ public class DefaultAlbumService implements AlbumService {
     }
 
     @Override
-    public void wijzigScore(long id, long score) {
+    public void wijzigScore(long id, long score) throws AlbumNietGevondenException{
         repository.findById(id).orElseThrow(AlbumNietGevondenException::new).wijzigScore(score);
     }
 }

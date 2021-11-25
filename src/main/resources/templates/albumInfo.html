@@ -5,17 +5,21 @@
     <title>JpaMuziek-Album</title>
 </head>
 <body>
-<h1 th:text="|${album.naam}-${album.artiest.naam}(${album.jaar})|"></h1>
-<ol>
-    <li th:each="track : ${album.tracks}" th:text="|${track.naam} ${track.tijd}|"></li>
-</ol>
-<span th:text="|totale speeltijd: ${album.totaalTijd}|"></span>
-<form th:object="${scoreFormRecord}" th:method="get" th:action="@{/album/{id}/score (id=${album.id})}">
-    <span th:text="|Album Score: ${album.score}|"></span><br>
-    <label>Nieuwe score:<span th:errors="*{score}"></span><input th:field="*{score}" ></label>
+<a th:href="@{/}">< homePage</a>
+<th:block th:if="${album}">
+    <h1 th:text="|${album.naam}-${album.artiest.naam}|"><a th:href="@{/}" th:text="|(${album.jaar})|"></a></h1>
+    <ol>
+        <li th:each="track : ${album.tracks}" th:text="|${track.naam} ${track.tijd}|"></li>
+    </ol>
+    <span th:text="|totale speeltijd: ${album.totaalTijd}|"></span>
+    <form th:object="${scoreFormRecord}" th:method="get" th:action="@{/album/{id}/score (id=${album.id})}">
+        <span th:text="|Album Score: ${album.score}|"></span><br>
+        <label>Nieuwe score:<span th:errors="*{score}"></span><input th:field="*{score}" type="number" min="0" max="10" ></label>
 
-    <input type="submit" value="Wijzigen">
-</form>
+        <input type="submit" value="Wijzigen">
+    </form>
+</th:block>
+<h1 th:unless="${album}">Album Niet Gevonden!</h1>
 
 </body>
 </html>

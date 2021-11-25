@@ -27,20 +27,25 @@ public class IndexController {
     }
     @GetMapping("/album/{id}")
     public ModelAndView albumInfo(@PathVariable long id){
-        var MVC = new ModelAndView("albumInfo", "album", service.findAlbumById(id));
-        MVC.addObject(new ScoreFormRecord(0));
-        return MVC;
+        try{
+            var MVC = new ModelAndView("albumInfo", "album", service.findAlbumById(id));
+            MVC.addObject(new ScoreFormRecord(0));
+            return MVC;
+        }catch (AlbumNietGevondenException e){
+            return new ModelAndView("albumInfo");
+        }
+
     }
     @GetMapping("album/{id}/score")
     public ModelAndView scoreWijziging(@PathVariable long id ,@Valid ScoreFormRecord form, Errors errors, RedirectAttributes redirect){
-        if (errors.hasErrors()) {
-            return new ModelAndView("albumInfo", "album", service.findAlbumById(id));
-        }
-        try {
+        try{
+            if(errors.hasErrors()){
+                return new ModelAndView("albumInfo", "album", service.findAlbumById(id));
+            }
             service.wijzigScore(id, form.score());
             redirect.addAttribute("id", id);
             return new ModelAndView("redirect:/album/{id}");
-        } catch (AlbumNietGevondenException ex) {
+        }catch (AlbumNietGevondenException e){
             return new ModelAndView("albumInfo");
         }
     }
