@@ -7,4 +7,5 @@ import java.util.List;
 public interface AlbumService {
     List<Album> getAllAlbums();
     Album findAlbumById(long id);
+    void wijzigScore(long id, long score);
 }

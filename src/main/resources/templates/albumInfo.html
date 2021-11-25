@@ -10,11 +10,11 @@
     <li th:each="track : ${album.tracks}" th:text="|${track.naam} ${track.tijd}|"></li>
 </ol>
 <span th:text="|totale speeltijd: ${album.totaalTijd}|"></span>
-<form>
+<form th:object="${scoreFormRecord}" th:method="get" th:action="@{/album/{id}/score (id=${album.id})}">
     <span th:text="|Album Score: ${album.score}|"></span><br>
-    <label for="score">Nieuwe score: </label>
-    <input id="score" type="number" max="10" min="0">
-    <input type="button" value="Wijzigen">
+    <label>Nieuwe score:<span th:errors="*{score}"></span><input th:field="*{score}" ></label>
+
+    <input type="submit" value="Wijzigen">
 </form>
 
 </body>

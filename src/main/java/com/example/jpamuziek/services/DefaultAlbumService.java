@@ -27,4 +27,9 @@ public class DefaultAlbumService implements AlbumService {
     public Album findAlbumById(long id) {
         return repository.findById(id).orElseThrow(AlbumNietGevondenException::new);
     }
+
+    @Override
+    public void wijzigScore(long id, long score) {
+        repository.findById(id).orElseThrow(AlbumNietGevondenException::new).wijzigScore(score);
+    }
 }

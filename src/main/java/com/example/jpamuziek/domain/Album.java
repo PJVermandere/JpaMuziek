@@ -71,8 +71,13 @@ public class Album {
         return som;
     }
 
+
     public Set<Tracks> getTracks() {
         return Collections.unmodifiableSet(tracks);
+    }
+
+    public void wijzigScore(long score){
+        this.score = (int) score;
     }
 
     @Override
