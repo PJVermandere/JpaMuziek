@@ -25,6 +25,20 @@ public class JpaAlbumRepository implements AlbumRepository {
     }
 
     @Override
+    public List<Album> findAlbumsByYear(int jaar) {
+        return manager.createNamedQuery("Album.findAlbumsByYear")
+                .setParameter("jaar", jaar)
+                .getResultList();
+    }
+
+    @Override
+    public List<Album> findAlbumsByArtistId(long artiestId) {
+        return manager.createNamedQuery("Album.findAlbumsByArtiestId")
+                .setParameter("artiestId", artiestId)
+                .getResultList();
+    }
+
+    @Override
     public Optional<Album> findById(long id) {
         return Optional.ofNullable(manager.find(Album.class, id));
     }

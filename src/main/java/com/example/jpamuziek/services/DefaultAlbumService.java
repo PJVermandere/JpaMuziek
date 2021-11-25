@@ -29,6 +29,16 @@ public class DefaultAlbumService implements AlbumService {
     }
 
     @Override
+    public List<Album> findAlbumsByYear(int jaar) {
+        return repository.findAlbumsByYear(jaar);
+    }
+
+    @Override
+    public List<Album> findAlbumsByArtiest(long artiestId) {
+        return repository.findAlbumsByArtistId(artiestId);
+    }
+
+    @Override
     public void wijzigScore(long id, long score) throws AlbumNietGevondenException{
         repository.findById(id).orElseThrow(AlbumNietGevondenException::new).wijzigScore(score);
     }

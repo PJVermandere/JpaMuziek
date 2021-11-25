@@ -36,7 +36,8 @@ public class IndexController {
         }
 
     }
-    @GetMapping("album/{id}/score")
+
+    @PostMapping("album/{id}/score")
     public ModelAndView scoreWijziging(@PathVariable long id ,@Valid ScoreFormRecord form, Errors errors, RedirectAttributes redirect){
         try{
             if(errors.hasErrors()){
@@ -48,5 +49,14 @@ public class IndexController {
         }catch (AlbumNietGevondenException e){
             return new ModelAndView("albumInfo");
         }
+    }
+
+    @GetMapping("/albums/{jaar}")
+    public ModelAndView albumsPerJaar(@PathVariable int jaar){
+        return new ModelAndView("index", "albumsPerJaar", service.findAlbumsByYear(jaar));
+    }
+    @GetMapping("/albums/artiest/{artiestId}")
+    public ModelAndView albumsPerArtiest(@PathVariable int artiestId){
+        return new ModelAndView("index", "albumsPerArtiest", service.findAlbumsByArtiest(artiestId));
     }
 }

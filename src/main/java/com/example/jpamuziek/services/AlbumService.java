@@ -9,4 +9,6 @@ public interface AlbumService {
     List<Album> getAllAlbums();
     Album findAlbumById(long id) throws AlbumNietGevondenException;
     void wijzigScore(long id, long score);
+    List<Album> findAlbumsByYear(int jaar);
+    List<Album> findAlbumsByArtiest(long artiestId);
 }

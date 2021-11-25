@@ -5,12 +5,16 @@
     <title>JpaMuziek</title>
 </head>
 <body>
-<h1>Albums</h1>
-<ul>
-    <li th:each="album : ${albums}">
-        <a  th:text="|${album.naam}-${album.artiest.naam}(${album.jaar})|" th:href="@{/album/{id} (id=${album.id})}"></a>
-    </li>
-</ul>
+
+<th:block th:if="${albums}">
+         <th:block th:replace="fragments::albumsDisplayer(title = 'Albums', albums = ${albums})"></th:block>
+</th:block>
+<th:block th:if="${albumsPerJaar}">
+    <th:block th:replace="fragments::albumsDisplayer(title = ${albumsPerJaar[0].jaar}, albums = ${albumsPerJaar})"></th:block>
+</th:block>
+<th:block th:if="${albumsPerArtiest}">
+    <th:block th:replace="fragments::albumsDisplayer(title = ${albumsPerArtiest[0].artiest.naam}, albums = ${albumsPerArtiest})"></th:block>
+</th:block>
 
 </body>
 </html>

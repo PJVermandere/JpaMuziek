@@ -1,0 +1,10 @@
+<div th:fragment="albumsDisplayer(title, albums)">
+    <h1 th:text="${title}"></h1>
+    <ul>
+        <li th:each="album : ${albums}">
+            <a  th:text="|${album.naam}-${album.artiest.naam}(${album.jaar})|" th:href="@{/album/{id} (id=${album.id})}"></a>
+        </li>
+    </ul>
+    <a th:href="@{/}">< homePage</a>
+
+</div>
