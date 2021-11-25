@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>JpaMuziek-Album</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/albumInfo.css}">
 </head>
 <body>
 <a th:href="@{/}">< homePage</a>
 <th:block th:if="${album}">
-    <h1 th:text="|${album.naam}-${album.artiest.naam}|"><a th:href="@{/}" th:text="|(${album.jaar})|"></a></h1>
+    <h1 th:text="|${album.naam}-${album.artiest.naam}|"></h1><h1><a th:href="@{/}" th:text="|(${album.jaar})|"></a></h1>
     <ol>
         <li th:each="track : ${album.tracks}" th:text="|${track.naam} ${track.tijd}|"></li>
     </ol>
