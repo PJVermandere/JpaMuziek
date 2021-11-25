@@ -1,6 +1,7 @@
 package com.example.jpamuziek.domain;
 
 import javax.persistence.*;
+import java.time.LocalTime;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -22,6 +23,7 @@ public class Album {
     private int jaar, score;
     private long barcode;
     public static final String ALBUM_FINDARTIEST = "Album.findArtiest";
+
 
     public Album() {
     }
@@ -58,6 +60,15 @@ public class Album {
     public long getBarcode() {
         return barcode;
 
+    }
+
+    public LocalTime getTotaalTijd() {
+        LocalTime som = LocalTime.MIN;
+        for(var track: tracks){
+            var tijd = track.getTijd();
+            som = som.plusHours(tijd.getHour()).plusMinutes(tijd.getMinute()).plusSeconds(tijd.getSecond());
+        };
+        return som;
     }
 
     public Set<Tracks> getTracks() {
