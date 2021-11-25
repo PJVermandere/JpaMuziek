@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JpaMuziek-Album</title>
+</head>
+<body>
+<h1 th:text="|${album.naam}-${album.artiest.naam}(${album.jaar})|"></h1>
+<ol>
+    <li th:each="track : ${album.tracks}" th:text="|${track.naam} ${track.tijd}|"></li>
+</ol>
+<span th:text="|totale speeltijd: ${album.totaalTijd}|"></span>
+<form>
+    <span th:text="|Album Score: ${album.score}|"></span><br>
+    <label for="score">Nieuwe score: </label>
+    <input id="score" type="number" max="10" min="0">
+    <input type="button" value="Wijzigen">
+</form>
+
+</body>
+</html>
